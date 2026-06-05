@@ -1,56 +1,82 @@
 {% extends 'base.html' %} {% block title %}Pelanggan | HostingPro{% endblock %}
 {% block content %}
 <section class="container py-5">
-  <div class="d-flex align-items-center justify-content-between mb-4">
-    <h2 class="fw-bold">Daftar Pelanggan</h2>
-    <a class="btn btn-outline-primary" href="{{ url_for('admin.dashboard') }}"
-      >Kembali</a
-    >
-  </div>
+  <div class="row g-4 align-items-stretch">
+    <div class="col-12">
+      <div class="card card-hover border border-opacity-25 overflow-hidden">
+        <div class="card-body">
+          <div
+            class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-2"
+          >
+            <div>
+              <h2 class="fw-bold mb-1">Daftar Pelanggan</h2>
+              <p class="text-body-secondary mb-0">
+                Kelola akun customer dari panel admin.
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <a
+                class="btn btn-outline-primary"
+                href="{{ url_for('admin.dashboard') }}"
+              >
+                Kembali
+              </a>
+            </div>
+          </div>
 
-  {% if customers %}
-  <div class="table-responsive">
-    <table class="table table-modern align-middle">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nama</th>
-          <th>Email</th>
-          <th>Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for c in customers %}
-        <tr>
-          <td class="text-body-secondary small">{{ c.id }}</td>
-          <td class="fw-semibold">{{ c.nama }}</td>
-          <td class="text-body-secondary">{{ c.email }}</td>
-          <td>
-            <span class="badge text-bg-dark border border-opacity-25"
-              >{{ c.role }}</span
-            >
-          </td>
-          <td class="text-end">
-            {% if c.role == 'customer' %}
-            <a
-              class="btn btn-sm btn-outline-danger"
-              href="{{ url_for('admin.user_delete', user_id=c.id) }}"
-              onclick="return confirm('Hapus user ini?');"
-            >
-              Hapus
-            </a>
-            {% endif %}
-          </td>
-        </tr>
+          <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.12)" />
 
-        {% endfor %}
-      </tbody>
-    </table>
+          {% if customers %}
+          <div class="table-responsive">
+            <table class="table table-modern align-middle mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 70px">ID</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th style="width: 120px">Role</th>
+                  <th style="width: 120px" class="text-end">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for c in customers %}
+                <tr>
+                  <td class="text-body-secondary small">{{ c.id }}</td>
+                  <td class="fw-semibold">{{ c.nama }}</td>
+                  <td class="text-body-secondary">{{ c.email }}</td>
+                  <td>
+                    <span class="badge text-bg-dark border border-opacity-25"
+                      >{{ c.role }}</span
+                    >
+                  </td>
+                  <td class="text-end">
+                    {% if c.role == 'customer' %}
+                    <a
+                      class="btn btn-sm btn-outline-danger"
+                      href="{{ url_for('admin.user_delete', user_id=c.id) }}"
+                      onclick="return confirm('Hapus user ini?');"
+                    >
+                      Hapus
+                    </a>
+                    {% else %}
+                    <span class="text-body-secondary small">—</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <div
+            class="p-4 rounded-4 border border-opacity-25 text-body-secondary"
+          >
+            Belum ada pelanggan.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
-  {% else %}
-  <div class="p-4 rounded-4 border border-opacity-25 text-body-secondary">
-    Belum ada pelanggan.
-  </div>
-  {% endif %}
 </section>
 {% endblock %}

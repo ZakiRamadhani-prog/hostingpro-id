@@ -87,3 +87,115 @@ body {
 .flash-holder {
   min-height: 46px;
 }
+
+/* Running animation (marquee) */
+.marquee {
+  --marquee-gap: 18px;
+  --marquee-speed: 22s;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.18);
+}
+
+[data-bs-theme="light"] .marquee {
+  background: rgba(248, 250, 252, 0.65);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(15, 23, 42, 0)
+  );
+}
+
+[data-bs-theme="light"] .marquee::before {
+  background: linear-gradient(
+    90deg,
+    rgba(248, 250, 252, 1),
+    rgba(248, 250, 252, 0)
+  );
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(15, 23, 42, 0)
+  );
+}
+
+[data-bs-theme="light"] .marquee::after {
+  background: linear-gradient(
+    270deg,
+    rgba(248, 250, 252, 1),
+    rgba(248, 250, 252, 0)
+  );
+}
+
+.marquee-track {
+  display: flex;
+  gap: var(--marquee-gap);
+  padding: 16px 18px;
+  width: max-content;
+
+  animation: marqueeScroll var(--marquee-speed) linear infinite;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-item {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-bs-theme="light"] .marquee-item {
+  border-color: rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.marquee-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(59, 130, 246, 0.18);
+  color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
