@@ -48,6 +48,35 @@ class OrderConfirmForm(FlaskForm):
     submit = SubmitField("Konfirmasi Pesanan")
 
 
+class CustomerOrderCancelForm(FlaskForm):
+    submit = SubmitField("Batalkan Pesanan")
+
+
+class CustomerTicketEditForm(FlaskForm):
+    judul = StringField("Judul", validators=[DataRequired(), Length(max=180)])
+    pesan = TextAreaField("Pesan", validators=[DataRequired(), Length(max=8000)])
+    submit = SubmitField("Simpan Perubahan")
+
+
+class CustomerTicketDeleteConfirmForm(FlaskForm):
+    submit = SubmitField("Hapus Tiket")
+
+
+class CustomerTicketCloseForm(FlaskForm):
+    submit = SubmitField("Tutup Tiket (resolved)")
+
+
+class AdminUserRoleEditForm(FlaskForm):
+    nama = StringField("Nama", validators=[DataRequired(), Length(max=120)])
+    email = StringField("Email", validators=[DataRequired(), Email(), Length(max=180)])
+    role = StringField("Role", validators=[DataRequired(), Length(max=20)])
+    submit = SubmitField("Simpan")
+
+
+class AdminContactDeleteConfirmForm(FlaskForm):
+    submit = SubmitField("Hapus Pesan")
+
+
 class AdminPackageUpdateForm(FlaskForm):
     nama_paket = StringField("Nama Paket", validators=[DataRequired(), Length(max=120)])
     tipe = StringField("Tipe (shared/dedicated)", validators=[DataRequired(), Length(max=30)])
@@ -65,4 +94,8 @@ class AdminTicketStatusForm(FlaskForm):
 class AdminOrderStatusForm(FlaskForm):
     status = StringField("Status Pesanan", validators=[DataRequired(), Length(max=30)])
     submit = SubmitField("Update Order")
+
+
+class AdminUserDeleteConfirmForm(FlaskForm):
+    submit = SubmitField("Hapus User")
 

@@ -30,7 +30,19 @@
               >{{ c.role }}</span
             >
           </td>
+          <td class="text-end">
+            {% if c.role == 'customer' %}
+            <a
+              class="btn btn-sm btn-outline-danger"
+              href="{{ url_for('admin.user_delete', user_id=c.id) }}"
+              onclick="return confirm('Hapus user ini?');"
+            >
+              Hapus
+            </a>
+            {% endif %}
+          </td>
         </tr>
+
         {% endfor %}
       </tbody>
     </table>

@@ -2,7 +2,17 @@ from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import login_required, current_user
 
 from extensions import db
-from forms import OrderConfirmForm, TicketForm, TicketMessageForm, ContactForm
+from forms import (
+    OrderConfirmForm,
+    TicketForm,
+    TicketMessageForm,
+    ContactForm,
+    CustomerOrderCancelForm,
+    CustomerTicketEditForm,
+    CustomerTicketDeleteConfirmForm,
+    CustomerTicketCloseForm,
+)
+
 
 from models import HostingPackage, Order, SupportTicket, TicketMessage, ContactMessage
 
@@ -97,8 +107,60 @@ def ticket_detail(ticket_id: int):
     return render_template("customer/ticket_detail.html", ticket=ticket, messages=messages, form=form)
 
 
+@customer_bp.route("/orders/<int:order_id>/cancel", methods=["GET", "POST"])
+@login_required
+def order_cancel(order_id: int):
+    order = Order.query.filter_by(id=order_id, user_id=current_user.id).first_or_404()
+    form = CustomerOrderCancelForm()
+    if form.validate_on_submit():
+        order.status = "canceled"
+        db.session.commit()
+        flash("Order dibatalkan.", "info")
+        return redirect(url_for("customer.orders"))
+    return render_template("customer/order_cancel.html", order=order, form=form)
+
+
+@customer_bp.route("/tickets/<int:ticket_id>/edit", methods=["GET", "POST"])
+@login_required
+def ticket_edit(ticket_id: int):
+    ticket = SupportTicket.query.filter_by(id=ticket_id, user_id=current_user.id).first_or_404()
+    form = CustomerTicketEditForm(obj=ticket)
+    if form.validate_on_submit():
+        ticket.judul = form.judul.data.strip()
+        ticket.pesan = form.pesan.data.strip()
+        db.session.commit()
+        flash("Tiket diperbarui.", "success")
+        return redirect(url_for("customer.tickets"))
+    return render_template("customer/ticket_edit.html", ticket=ticket, form=form)
+
+
+@customer_bp.route("/tickets/<int:ticket_id>/delete", methods=["POST"])
+@login_required
+def ticket_delete(ticket_id: int):
+    ticket = SupportTicket.query.filter_by(id=ticket_id, user_id=current_user.id).first_or_404()
+    form = CustomerTicketDeleteConfirmForm()
+    if form.validate_on_submit():
+        db.session.delete(ticket)
+        db.session.commit()
+        flash("Tiket dihapus.", "info")
+    return redirect(url_for("customer.tickets"))
+
+
+@customer_bp.route("/tickets/<int:ticket_id>/close", methods=["POST"])
+@login_required
+def ticket_close(ticket_id: int):
+    ticket = SupportTicket.query.filter_by(id=ticket_id, user_id=current_user.id).first_or_404()
+    form = CustomerTicketCloseForm()
+    if form.validate_on_submit():
+        ticket.status = "resolved"
+        db.session.commit()
+        flash("Tiket ditutup (resolved).", "success")
+    return redirect(url_for("customer.tickets"))
+
+
 @customer_bp.route("/kontak", methods=["GET", "POST"])
 def contact():
+
     # Public page but save to DB
     form = ContactForm()
     if form.validate_on_submit():

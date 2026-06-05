@@ -2,8 +2,16 @@ from flask import Blueprint, abort, flash, redirect, render_template, url_for
 from flask_login import login_required, current_user
 
 from extensions import db
-from forms import AdminPackageUpdateForm, AdminTicketStatusForm, TicketMessageForm
-from models import HostingPackage, User, ContactMessage, SupportTicket, TicketMessage
+from forms import (
+    AdminPackageUpdateForm,
+    AdminTicketStatusForm,
+    TicketMessageForm,
+    AdminUserDeleteConfirmForm,
+)
+
+
+from models import HostingPackage, User, ContactMessage, SupportTicket, TicketMessage, Order
+
 
 admin_bp = Blueprint("admin", __name__)
 
@@ -119,8 +127,40 @@ def tickets():
     return render_template("admin/tickets.html", tickets=tickets)
 
 
+@admin_bp.route("/pelanggan/<int:user_id>/hapus", methods=["GET", "POST"])
+@login_required
+def user_delete(user_id: int):
+    admin_required()
+
+    user = User.query.get_or_404(user_id)
+
+    # cegah admin menghapus dirinya sendiri
+    if user.id == current_user.id:
+        flash("Tidak bisa menghapus akun admin yang sedang login.", "danger")
+        return redirect(url_for("admin.customers"))
+
+    form = AdminUserDeleteConfirmForm()
+    if form.validate_on_submit():
+        # karena Order.user_id NOT NULL, hapus dependensi dulu agar konsisten
+        Order.query.filter_by(user_id=user.id).delete()
+        SupportTicket.query.filter_by(user_id=user.id).delete()
+
+        # (ticket_messages cascade delete-orphan sudah menangani pesan ketika ticket dihapus)
+        db.session.commit()
+
+        db.session.delete(user)
+        db.session.commit()
+
+        flash("User dihapus.", "info")
+        return redirect(url_for("admin.customers"))
+
+
+    return render_template("admin/user_confirm_delete.html", user=user, form=form)
+
+
 @admin_bp.route("/tickets/<int:ticket_id>", methods=["GET", "POST"])
 def ticket_detail(ticket_id: int):
+
     admin_required()
     ticket = SupportTicket.query.get_or_404(ticket_id)
 

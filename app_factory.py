@@ -14,8 +14,7 @@ def create_app(config_class: type[Config] | None = None) -> Flask:
     config_class = config_class or Config
     app.config.from_object(config_class)
 
-    # Ensure instance-relative folders exist if used
-    os.makedirs(app.config.get("SQLALCHEMY_DATABASE_URI"), exist_ok=True) if False else None
+
 
     # Extensions
     db.init_app(app)

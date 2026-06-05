@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block title %}Edit Tiket | HostingPro{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <h2 class="fw-bold mb-2">Edit Tiket #{{ ticket.id }}</h2>
+          <p class="text-body-secondary mb-4">
+            Status saat ini:
+            <span class="badge text-bg-dark border border-opacity-25"
+              >{{ ticket.status }}</span
+            >
+          </p>
+
+          <form method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.judul.label }}</label>
+              {{ form.judul(class_='form-control') }} {% for err in
+              form.judul.errors %}
+              <div class="text-danger small">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.pesan.label }}</label>
+              {{ form.pesan(class_='form-control', rows=6) }} {% for err in
+              form.pesan.errors %}
+              <div class="text-danger small">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              {{ form.submit.label.text }}
+            </button>
+            <a
+              href="{{ url_for('customer.tickets') }}"
+              class="btn btn-outline-light w-100 mt-2"
+              >Kembali</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

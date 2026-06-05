@@ -18,9 +18,19 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/background-animated.css') }}"
+    />
   </head>
 
   <body>
+    <div class="animated-bg" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+    </div>
+
     {% include 'partials/navbar.html' %}
 
     <main>

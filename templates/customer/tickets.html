@@ -28,9 +28,46 @@
         {{ t.created_at.strftime('%d %b %Y %H:%M') }}
       </div>
     </a>
-    {% endfor %}
+
+    <div class="d-flex gap-2 mb-3" style="padding: 0 6px">
+      <a
+        class="btn btn-sm btn-outline-primary flex-fill"
+        href="{{ url_for('customer.ticket_edit', ticket_id=t.id) }}"
+        >Edit</a
+      >
+      <form
+        method="post"
+        action="{{ url_for('customer.ticket_delete', ticket_id=t.id) }}"
+        class="flex-fill"
+      >
+        {{ csrf_token() }}
+        <button
+          class="btn btn-sm btn-outline-danger w-100"
+          type="submit"
+          onclick="return confirm('Hapus tiket ini?');"
+        >
+          Hapus
+        </button>
+      </form>
+    </div>
+
+    {% if t.status != 'resolved' %}
+    <form
+      method="post"
+      action="{{ url_for('customer.ticket_close', ticket_id=t.id) }}"
+      class="mb-4"
+      style="padding: 0 6px"
+    >
+      {{ csrf_token() }}
+      <button class="btn btn-sm btn-success w-100" type="submit">
+        Tutup (resolved)
+      </button>
+    </form>
+
+    {% endif %} {% endfor %}
   </div>
   {% else %}
+
   <div class="p-4 rounded-4 border border-opacity-25 text-body-secondary">
     Belum ada tiket.
   </div>

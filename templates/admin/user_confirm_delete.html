@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}Hapus User | Admin | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <h2 class="fw-bold mb-2">Hapus User #{{ user.id }}</h2>
+          <p class="text-body-secondary mb-4">
+            Anda yakin ingin menghapus user <strong>{{ user.nama }}</strong> ({{
+            user.email }})? Tindakan ini tidak bisa dibatalkan.
+          </p>
+
+          <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <div class="text-secondary">Konfirmasi hapus:</div>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100">
+              {{ form.submit.label.text }}
+            </button>
+
+            <a
+              href="{{ url_for('admin.customers') }}"
+              class="btn btn-outline-light w-100 mt-2"
+              >Batal</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

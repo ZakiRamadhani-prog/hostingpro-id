@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block title %}Batalkan Order | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <h2 class="fw-bold mb-2">Batalkan Order #{{ order.id }}</h2>
+          <p class="text-body-secondary mb-4">
+            Paket:
+            <span class="fw-semibold">{{ order.package.nama_paket }}</span>
+          </p>
+
+          <form method="post">
+            {{ form.hidden_tag() }}
+            <button type="submit" class="btn btn-danger w-100">Batalkan</button>
+            <a
+              href="{{ url_for('customer.orders') }}"
+              class="btn btn-outline-light w-100 mt-2"
+              >Kembali</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
