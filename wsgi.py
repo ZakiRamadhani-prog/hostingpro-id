@@ -1,6 +1,10 @@
-"""WSGI entrypoint for production servers.
+"""WSGI entrypoint for PythonAnywhere.
 
-Use this `application` variable with WSGI servers like Gunicorn/uWSGI.
+PythonAnywhere expects:
+- file: wsgi.py
+- callable: application
+
+This module must be importable from PythonAnywhere project root.
 """
 
 from app_factory import create_app
