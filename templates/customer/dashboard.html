@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% block title %}Dashboard | HostingPro{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h2 class="fw-bold">Dashboard Pelanggan</h2>
+      <p class="text-body-secondary mb-0">
+        Selamat datang, {{ current_user.nama }}.
+      </p>
+    </div>
+    <a
+      class="btn btn-outline-primary"
+      href="{{ url_for('customer.ticket_create') }}"
+      >Buat Tiket</a
+    >
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card-hover card border border-opacity-25 h-100">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Pesanan</div>
+          <div class="display-6 fw-bold">{{ orders|length }}</div>
+          <a
+            class="text-primary text-decoration-none small"
+            href="{{ url_for('customer.orders') }}"
+            >Lihat riwayat</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-hover card border border-opacity-25 h-100">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Tiket Support</div>
+          <div class="display-6 fw-bold">{{ tickets|length }}</div>
+          <a
+            class="text-primary text-decoration-none small"
+            href="{{ url_for('customer.tickets') }}"
+            >Kelola tiket</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-hover card border border-opacity-25 h-100">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Akun</div>
+          <div class="fw-semibold">{{ current_user.email }}</div>
+          <div class="text-body-secondary small">
+            Role: {{ current_user.role }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="card-hover card border border-opacity-25">
+          <div class="card-body p-4">
+            <h4 class="fw-semibold">Pesanan Terbaru</h4>
+            {% if orders %}
+            <div class="table-responsive mt-3">
+              <table class="table table-modern align-middle">
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>Paket</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for o in orders[:5] %}
+                  <tr>
+                    <td class="text-body-secondary small">
+                      {{ o.tanggal_pesan.strftime('%d %b %Y') }}
+                    </td>
+                    <td class="fw-semibold">{{ o.package.nama_paket }}</td>
+                    <td>
+                      <span class="badge text-bg-dark border border-opacity-25"
+                        >{{ o.status }}</span
+                      >
+                    </td>
+                    <td>
+                      <a
+                        class="btn btn-sm btn-outline-primary"
+                        href="{{ url_for('admin_orders.list_orders') }}"
+                        onclick="return false;"
+                        >Detail</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <p class="text-body-secondary">Belum ada pesanan.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card-hover card border border-opacity-25">
+          <div class="card-body p-4">
+            <h4 class="fw-semibold">Tiket Terbaru</h4>
+            {% if tickets %}
+            <div class="list-group list-group-flush mt-3">
+              {% for t in tickets[:5] %}
+              <a
+                href="{{ url_for('customer.ticket_detail', ticket_id=t.id) }}"
+                class="list-group-item list-group-item-action bg-transparent border-bottom border-opacity-10"
+              >
+                <div class="fw-semibold">{{ t.judul }}</div>
+                <div class="text-body-secondary small">
+                  {{ t.status }} • {{ t.created_at.strftime('%d %b %Y') }}
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-body-secondary">Belum ada tiket.</p>
+            {% endif %}
+
+            <a
+              class="btn btn-primary w-100 mt-3"
+              href="{{ url_for('customer.tickets') }}"
+              >Lihat semua tiket</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

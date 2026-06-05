@@ -1,0 +1,1 @@
+Google Maps placeholder: gunakan iframe pada templates/public/contact.html.

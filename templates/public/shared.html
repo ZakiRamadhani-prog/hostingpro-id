@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% block title %}Shared Hosting | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h2 class="fw-bold">Shared Hosting</h2>
+      <p class="text-body-secondary mb-0">
+        Paket fleksibel untuk berbagai kebutuhan website.
+      </p>
+    </div>
+    <a
+      class="btn btn-outline-primary"
+      href="{{ url_for('customer.dashboard') if current_user.is_authenticated else url_for('auth.login') }}"
+      >Kembali ke Dashboard</a
+    >
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card-hover card h-100 border border-opacity-25">
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Basic</h4>
+          <ul class="mt-3 mb-4">
+            <li>1 Website</li>
+            <li>10 GB SSD</li>
+            <li>Free SSL</li>
+          </ul>
+          <div class="d-flex align-items-baseline gap-2">
+            <div class="display-6 fw-bold">Rp25.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=1) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div
+        class="card-hover card h-100 border border-primary border-opacity-25"
+      >
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Business</h4>
+          <ul class="mt-3 mb-4">
+            <li>10 Website</li>
+            <li>50 GB SSD</li>
+            <li>Free SSL</li>
+            <li>Daily Backup</li>
+          </ul>
+          <div class="d-flex align-items-baseline gap-2">
+            <div class="display-6 fw-bold">Rp75.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=2) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card-hover card h-100 border border-opacity-25">
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Premium</h4>
+          <ul class="mt-3 mb-4">
+            <li>Unlimited Website</li>
+            <li>100 GB SSD</li>
+            <li>Free SSL</li>
+            <li>Daily Backup</li>
+            <li>Priority Support</li>
+          </ul>
+          <div class="d-flex align-items-baseline gap-2">
+            <div class="display-6 fw-bold">Rp150.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=3) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% block title %}Kontak | HostingPro{% endblock %} {%
+block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="p-4 rounded-4 border border-opacity-25 reveal">
+        <h2 class="fw-bold">Kontak</h2>
+        <p class="text-body-secondary">
+          Kirim pesan untuk konsultasi dan informasi paket.
+        </p>
+
+        <form method="post" class="mt-3">
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.nama.label }}</label>
+            {{ form.nama(class_='form-control') }} {% for err in
+            form.nama.errors %}
+            <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.email.label }}</label>
+            {{ form.email(class_='form-control') }} {% for err in
+            form.email.errors %}
+            <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.telepon.label }}</label>
+            {{ form.telepon(class_='form-control') }} {% for err in
+            form.telepon.errors %}
+            <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.pesan.label }}</label>
+            {{ form.pesan(class_='form-control', rows=5) }} {% for err in
+            form.pesan.errors %}
+            <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <button class="btn btn-primary w-100" type="submit">
+            {{ form.submit.label.text }}
+          </button>
+        </form>
+      </div>
+
+      <div class="row g-3 mt-4">
+        <div class="col-md-6">
+          <div class="p-4 rounded-4 border border-opacity-25 reveal">
+            <h5 class="fw-semibold">Alamat Perusahaan</h5>
+            <p class="text-body-secondary mb-0">Jl. Contoh No. 123, Jakarta</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 rounded-4 border border-opacity-25 reveal">
+            <h5 class="fw-semibold">Email Support</h5>
+            <p class="text-body-secondary mb-0">support@hostingpro.id</p>
+            <h5 class="fw-semibold mt-3">WhatsApp</h5>
+            <p class="text-body-secondary mb-0">+62 812-3456-7890</p>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="p-4 rounded-4 border border-opacity-25 reveal">
+            <h5 class="fw-semibold">Google Maps</h5>
+            <p class="text-body-secondary small mb-3">
+              (Embed map disederhanakan untuk tugas ini)
+            </p>
+            <div class="ratio ratio-16x9">
+              <iframe
+                src="https://www.google.com/maps?q=Jakarta&output=embed"
+                style="border: 0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

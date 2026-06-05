@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %}Kelola Pesanan | HostingPro{%
+endblock %} {% block content %}
+<div class="container pt-4">
+  <div class="reveal">
+    <h1 class="fw-bold mb-2">Kelola Pesanan</h1>
+    <div class="text-secondary mb-3">
+      Pemrosesan order oleh admin (success/canceled).
+    </div>
+
+    {% if orders %}
+    <div class="table-responsive">
+      <table class="table table-modern align-middle">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Package</th>
+            <th>Tanggal Pesan</th>
+            <th>Status</th>
+            <th class="text-end">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for o in orders %}
+          <tr>
+            <td class="fw-semibold">{{ o.user.nama }}</td>
+            <td>{{ o.package.nama_paket }}</td>
+            <td class="text-secondary">
+              {{ o.tanggal_pesan.strftime('%Y-%m-%d') }}
+            </td>
+            <td><span class="badge text-bg-primary">{{ o.status }}</span></td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-outline-primary"
+                href="{{ url_for('admin_orders.order_detail', order_id=o.id) }}"
+                >Proses</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">Belum ada pesanan.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

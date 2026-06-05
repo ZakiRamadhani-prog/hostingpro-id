@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block title %}Detail Tiket | Admin | HostingPro{%
+endblock %} {% block content %}
+<div class="container pt-4">
+  <div class="reveal">
+    <div
+      class="d-flex justify-content-between align-items-start flex-wrap gap-3"
+    >
+      <div>
+        <h1 class="fw-bold mb-1">{{ ticket.judul }}</h1>
+        <div class="text-secondary">
+          User: {{ ticket.user.nama }} • {{ ticket.user.email }}
+        </div>
+        <div class="text-secondary mt-2" style="white-space: pre-line">
+          {{ ticket.pesan }}
+        </div>
+      </div>
+      <span class="badge text-bg-primary">{{ ticket.status }}</span>
+    </div>
+
+    <div class="row g-4 mt-2">
+      <div class="col-lg-8">
+        <div
+          class="card-hover p-4 rounded-4"
+          style="
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+          "
+        >
+          <h2 class="h5 fw-bold mb-3">Percakapan</h2>
+          <div class="d-flex flex-column gap-3">
+            {% for m in messages %}
+            <div
+              class="d-flex justify-content-{{ 'end' if m.author_id==current_user.id else 'start' }}"
+            >
+              <div
+                class="p-3 rounded-4"
+                style="
+                  max-width: 85%;
+                  background: rgba(59, 130, 246, 0.12);
+                  border: 1px solid rgba(59, 130, 246, 0.35);
+                "
+              >
+                <div class="text-secondary small">
+                  {{ m.created_at.strftime('%Y-%m-%d %H:%M') }}
+                </div>
+                <div class="mt-1">{{ m.pesan }}</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="text-secondary">Belum ada balasan.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div
+          class="card-hover p-4 rounded-4"
+          style="
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+          "
+        >
+          <h2 class="h5 fw-bold mb-3">Update Tiket</h2>
+          <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.status.label }}</label>
+              {{ form.status(class_='form-control') }} {% for e in
+              form.status.errors %}
+              <div class="text-danger small">{{ e }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.pesan.label }}</label>
+              {{ form.pesan(class_='form-control', rows=6) }} {% for e in
+              form.pesan.errors %}
+              <div class="text-danger small">{{ e }}</div>
+              {% endfor %}
+              <div class="text-secondary small">
+                Opsional. Jika diisi akan menjadi balasan admin.
+              </div>
+            </div>
+
+            {{ form.submit(class_='btn btn-primary w-100') }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

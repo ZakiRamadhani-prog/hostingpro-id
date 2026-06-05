@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %}Buat Tiket | HostingPro{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <h2 class="fw-bold">Buat Tiket Support</h2>
+          <p class="text-body-secondary">
+            Jelaskan kebutuhan Anda agar tim kami bisa membantu lebih cepat.
+          </p>
+
+          <form method="post" class="mt-3">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.judul.label }}</label>
+              {{ form.judul(class_='form-control') }} {% for err in
+              form.judul.errors %}
+              <div class="text-danger small">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.pesan.label }}</label>
+              {{ form.pesan(class_='form-control', rows=6) }} {% for err in
+              form.pesan.errors %}
+              <div class="text-danger small">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              {{ form.submit.label.text }}
+            </button>
+            <a
+              href="{{ url_for('customer.tickets') }}"
+              class="btn btn-outline-light ms-2"
+              >Batal</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base.html' %} {% block title %}Home | HostingPro{% endblock %} {%
+block content %}
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <div class="reveal">
+          <div class="d-inline-flex gap-2 align-items-center mb-3">
+            <span class="badge text-bg-primary">SSD Storage</span>
+            <span class="badge text-bg-dark border border-opacity-25"
+              >Free SSL</span
+            >
+          </div>
+          <h1 class="fw-bold">Solusi Hosting Cepat, Aman, dan Terpercaya</h1>
+          <p class="text-body-secondary mt-3">
+            Infrastruktur hosting modern untuk website bisnis Anda—performanya
+            cepat, keamanannya terjaga, dan support responsif 24/7.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a
+              class="btn btn-primary btn-lg"
+              href="{{ url_for('customer.dashboard') if current_user.is_authenticated and current_user.role != 'admin' else url_for('auth.login') }}"
+            >
+              Mulai Sekarang
+            </a>
+            <a
+              class="btn btn-outline-primary btn-lg"
+              href="{{ url_for('public.shared_hosting') }}"
+            >
+              Lihat Paket
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="reveal">
+          <div class="card bg-transparent border border-opacity-25">
+            <div class="card-body">
+              <h5 class="mb-3 fw-semibold">Kenapa HostingPro?</h5>
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="p-3 rounded-3 border border-opacity-10">
+                    <div class="fw-bold">99.9%</div>
+                    <div class="text-body-secondary small">Uptime</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-3 border border-opacity-10">
+                    <div class="fw-bold">5000+</div>
+                    <div class="text-body-secondary small">Pelanggan</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="p-3 mt-1 rounded-3 border border-opacity-10">
+                    <div class="fw-bold">24/7 Support</div>
+                    <div class="text-body-secondary small">
+                      Tim ahli siap membantu
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <a href="#fitur" class="btn btn-outline-light w-100"
+                  >Lihat Fitur Unggulan</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fitur" class="row g-3 mt-5 reveal">
+      <div class="col-12">
+        <h3 class="section-title fw-semibold mb-3">Fitur unggulan</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          SSD Storage
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          Free SSL
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          Daily Backup
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          DDoS Protection
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          LiteSpeed Server
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-hover p-3 rounded-3 border border-opacity-25 h-100">
+          cPanel Control Panel
+        </div>
+      </div>
+    </div>
+
+    <div id="kontak" class="mt-5 reveal">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-6">
+          <div class="p-4 rounded-4 border border-opacity-25 h-100">
+            <h4 class="fw-semibold">Butuh rekomendasi paket?</h4>
+            <p class="text-body-secondary">
+              Konsultasi cepat dengan tim kami untuk kebutuhan website Anda.
+            </p>
+            <a class="btn btn-primary" href="{{ url_for('public.home') }}"
+              >Konsultasi</a
+            >
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 rounded-4 border border-opacity-25 h-100">
+            <h4 class="fw-semibold">Tanya lewat form kontak</h4>
+            <p class="text-body-secondary">
+              Kami balas pesan Anda secepat mungkin.
+            </p>
+            <a
+              class="btn btn-outline-primary"
+              href="{{ url_for('customer.contact') }}"
+              >Hubungi Kami</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 reveal">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <a
+            href="{{ url_for('public.shared_hosting') }}"
+            class="text-decoration-none"
+          >
+            <div
+              class="card-hover p-4 rounded-4 border border-opacity-25 h-100"
+            >
+              <div class="fw-semibold">Shared Hosting</div>
+              <div class="text-body-secondary small">
+                Cocok untuk website pribadi hingga bisnis
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a
+            href="{{ url_for('public.dedicated_server') }}"
+            class="text-decoration-none"
+          >
+            <div
+              class="card-hover p-4 rounded-4 border border-opacity-25 h-100"
+            >
+              <div class="fw-semibold">Dedicated Server</div>
+              <div class="text-body-secondary small">
+                Performa maksimal untuk skala besar
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

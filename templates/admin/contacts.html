@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block title %}Kontak | Admin | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h2 class="fw-bold mb-0">Pesan Kontak</h2>
+      <p class="text-body-secondary mb-0">Lihat semua pesan yang masuk.</p>
+    </div>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin.dashboard') }}"
+      >Kembali</a
+    >
+  </div>
+
+  {% if contacts %}
+  <div class="list-group">
+    {% for c in contacts %}
+    <div
+      class="list-group-item bg-transparent border border-opacity-10 mb-2 rounded-4"
+    >
+      <div class="d-flex justify-content-between align-items-start gap-3">
+        <div>
+          <div class="fw-semibold">{{ c.nama }}</div>
+          <div class="text-body-secondary small">
+            {{ c.email }} • {{ c.telepon }}
+          </div>
+        </div>
+        <div class="text-body-secondary small">
+          {{ c.created_at.strftime('%d %b %Y %H:%M') }}
+        </div>
+      </div>
+      <div class="mt-2">
+        <div class="text-body-secondary">{{ c.pesan }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="p-4 rounded-4 border border-opacity-25 text-body-secondary">
+    Belum ada pesan kontak.
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

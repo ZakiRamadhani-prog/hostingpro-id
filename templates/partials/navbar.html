@@ -1,0 +1,96 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-transparent position-sticky top-0 z-3 border-bottom border-opacity-25"
+  style="backdrop-filter: blur(10px)"
+>
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{{ url_for('public.home') }}">
+      HostingPro
+      <span class="text-primary">.id</span>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMain"
+      aria-controls="navMain"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.shared_hosting') }}"
+            >Shared Hosting</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.dedicated_server') }}"
+            >Dedicated Server</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.about') }}">Tentang</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.faq') }}">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.home') }}#fitur"
+            >Fitur</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('public.home') }}#kontak"
+            >Kontak</a
+          >
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-lg-center gap-2 ms-lg-3">
+        <button id="themeToggle" class="btn btn-sm btn-outline-primary">
+          Dark mode
+        </button>
+
+        {% if current_user.is_authenticated %} {% if current_user.role ==
+        'admin' %}
+        <a
+          class="btn btn-sm btn-primary"
+          href="{{ url_for('admin.dashboard') }}"
+          >Admin</a
+        >
+        <a
+          class="btn btn-sm btn-outline-primary"
+          href="{{ url_for('admin_orders.list_orders') }}"
+          >Order</a
+        >
+
+        {% else %}
+        <a
+          class="btn btn-sm btn-primary"
+          href="{{ url_for('customer.dashboard') }}"
+          >Dashboard</a
+        >
+        {% endif %}
+        <a
+          class="btn btn-sm btn-outline-light"
+          href="{{ url_for('auth.logout') }}"
+          >Logout</a
+        >
+        {% else %}
+        <a class="btn btn-sm btn-primary" href="{{ url_for('auth.login') }}"
+          >Login</a
+        >
+        <a
+          class="btn btn-sm btn-outline-light"
+          href="{{ url_for('auth.register') }}"
+          >Register</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

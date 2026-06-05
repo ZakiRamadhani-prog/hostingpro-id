@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}Tiket Support | Admin | HostingPro{%
+endblock %} {% block content %}
+<div class="container pt-4">
+  <div class="reveal">
+    <h1 class="fw-bold mb-2">Tiket Support</h1>
+    <div class="text-secondary mb-3">
+      Update status dan tambahkan balasan admin.
+    </div>
+
+    {% if tickets %}
+    <div class="row g-3">
+      {% for t in tickets %}
+      <div class="col-lg-6">
+        <div
+          class="card-hover p-4 rounded-4 h-100"
+          style="
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+          "
+        >
+          <div class="d-flex justify-content-between align-items-start gap-3">
+            <div>
+              <div class="fw-bold fs-5">{{ t.judul }}</div>
+              <div class="text-secondary mt-2">
+                {{ t.pesan[:160] }}{% if t.pesan|length>160 %}...{% endif %}
+              </div>
+            </div>
+            <span class="badge text-bg-primary">{{ t.status }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="text-secondary">User: {{ t.user.nama }}</div>
+            <a
+              class="btn btn-sm btn-outline-primary"
+              href="{{ url_for('admin.ticket_detail', ticket_id=t.id) }}"
+              >Detail</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">Belum ada tiket.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

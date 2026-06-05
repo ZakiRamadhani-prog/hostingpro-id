@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block title %}Admin Dashboard | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <h2 class="fw-bold mb-3">Admin Dashboard</h2>
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Pelanggan</div>
+          <div class="display-6 fw-bold">{{ users_count }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Tiket pending</div>
+          <div class="display-6 fw-bold">{{ tickets_pending }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Pesan kontak</div>
+          <div class="display-6 fw-bold">{{ contacts_count }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-hover card border border-opacity-25">
+        <div class="card-body p-4">
+          <div class="text-body-secondary small">Order</div>
+          <div class="display-6 fw-bold">{{ orders_count }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-3">
+    <div class="col-md-6">
+      <div class="p-4 rounded-4 border border-opacity-25 reveal">
+        <h4 class="fw-semibold">Menu Admin</h4>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <a class="btn btn-primary" href="{{ url_for('admin.packages') }}"
+            >Kelola Paket</a
+          >
+          <a
+            class="btn btn-outline-primary"
+            href="{{ url_for('admin.customers') }}"
+            >Pelanggan</a
+          >
+          <a
+            class="btn btn-outline-primary"
+            href="{{ url_for('admin.contacts') }}"
+            >Kontak</a
+          >
+          <a
+            class="btn btn-outline-primary"
+            href="{{ url_for('admin.tickets') }}"
+            >Tiket Support</a
+          >
+          <a
+            class="btn btn-outline-primary"
+            href="{{ url_for('admin_orders.list_orders') }}"
+            >Order</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-4 rounded-4 border border-opacity-25 reveal">
+        <h4 class="fw-semibold">Catatan</h4>
+        <p class="text-body-secondary mb-0 mt-2">
+          Admin dapat memproses tiket dan memperbarui status pesanan.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

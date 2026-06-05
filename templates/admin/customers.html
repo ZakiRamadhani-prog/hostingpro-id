@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %}Pelanggan | HostingPro{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h2 class="fw-bold">Daftar Pelanggan</h2>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin.dashboard') }}"
+      >Kembali</a
+    >
+  </div>
+
+  {% if customers %}
+  <div class="table-responsive">
+    <table class="table table-modern align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in customers %}
+        <tr>
+          <td class="text-body-secondary small">{{ c.id }}</td>
+          <td class="fw-semibold">{{ c.nama }}</td>
+          <td class="text-body-secondary">{{ c.email }}</td>
+          <td>
+            <span class="badge text-bg-dark border border-opacity-25"
+              >{{ c.role }}</span
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="p-4 rounded-4 border border-opacity-25 text-body-secondary">
+    Belum ada pelanggan.
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

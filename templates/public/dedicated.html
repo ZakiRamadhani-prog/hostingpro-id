@@ -1,0 +1,146 @@
+{% extends 'base.html' %} {% block title %}Dedicated Server | HostingPro{%
+endblock %} {% block content %}
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h2 class="fw-bold">Dedicated Server</h2>
+      <p class="text-body-secondary mb-0">
+        Performa maksimal untuk beban kerja yang lebih berat.
+      </p>
+    </div>
+    <a
+      class="btn btn-outline-primary"
+      href="{{ url_for('public.shared_hosting') }}"
+      >Paket Shared</a
+    >
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card-hover card border border-opacity-25 h-100">
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Starter Server</h4>
+          <div class="mt-3">
+            <div class="d-flex justify-content-between">
+              <span>CPU</span><span class="fw-semibold">4 Core</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>RAM</span><span class="fw-semibold">8 GB</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>SSD</span><span class="fw-semibold">240 GB</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-4">
+            <div class="display-6 fw-bold">Rp1.500.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=4) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div
+        class="card-hover card border border-primary border-opacity-25 h-100"
+      >
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Professional Server</h4>
+          <div class="mt-3">
+            <div class="d-flex justify-content-between">
+              <span>CPU</span><span class="fw-semibold">8 Core</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>RAM</span><span class="fw-semibold">16 GB</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>SSD</span><span class="fw-semibold">480 GB</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-4">
+            <div class="display-6 fw-bold">Rp3.000.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=5) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card-hover card border border-opacity-25 h-100">
+        <div class="card-body p-4">
+          <h4 class="fw-bold">Enterprise Server</h4>
+          <div class="mt-3">
+            <div class="d-flex justify-content-between">
+              <span>CPU</span><span class="fw-semibold">16 Core</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>RAM</span><span class="fw-semibold">32 GB</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>SSD</span><span class="fw-semibold">1 TB</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-4">
+            <div class="display-6 fw-bold">Rp6.000.000</div>
+            <div class="text-body-secondary">/bulan</div>
+          </div>
+          <a
+            class="btn btn-primary w-100 mt-3"
+            href="{{ url_for('customer.order_package', package_id=6) }}"
+            >Pesan Sekarang</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h3 class="fw-semibold mb-3">Ringkasan Spesifikasi</h3>
+    <div class="table-responsive">
+      <table class="table table-modern align-middle">
+        <thead>
+          <tr>
+            <th>Paket</th>
+            <th>CPU</th>
+            <th>RAM</th>
+            <th>SSD</th>
+            <th>Harga</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="fw-semibold">Starter Server</td>
+            <td>4 Core</td>
+            <td>8 GB</td>
+            <td>240 GB</td>
+            <td class="fw-semibold">Rp1.500.000</td>
+          </tr>
+          <tr>
+            <td class="fw-semibold">Professional Server</td>
+            <td>8 Core</td>
+            <td>16 GB</td>
+            <td>480 GB</td>
+            <td class="fw-semibold">Rp3.000.000</td>
+          </tr>
+          <tr>
+            <td class="fw-semibold">Enterprise Server</td>
+            <td>16 Core</td>
+            <td>32 GB</td>
+            <td>1 TB</td>
+            <td class="fw-semibold">Rp6.000.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
